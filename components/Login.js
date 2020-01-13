@@ -1,10 +1,18 @@
 // child of MainContainer
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, StyleSheet, Button } from 'react-native'
 
 const Login = props => {
+
     return ( <View style={styles.login}>
-        <Text style={styles.text}> This is da login page! </Text>
+        {/* 
+            these buttons should be in main container. 
+            the code here should be the ACTUAL login 'form'
+        */}
+        <TextInput
+            placeholder='name'
+        />
+        
     </View>
     )
 }
@@ -12,9 +20,17 @@ const Login = props => {
 const styles = StyleSheet.create({
     login: {
         padding: 10,
-        backgroundColor: 'lightpink'
+        backgroundColor: 'darkblue',
+        borderRadius: 10
     },
     text: {
         color: 'white'
     }
 })
+
+export default Login
+
+// STRETCH GOAL NOTES
+/* 
+    1. Can I change the button color/text style? (not blue cause ugly!)
+*/
