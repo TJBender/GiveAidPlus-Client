@@ -1,11 +1,12 @@
 // child of App (export for use)
 // sibling to NavBar
 // NavBar is a sibling of maincontainer
+// get data from app
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import Login from '../components/Login'
-import SignUp from '../components/SignUp'
-//  WHERE DO I FETCH?!!?!??!?!?!?! 
+// import Login from '../components/Login'
+// import SignUp from '../components/SignUp'
+
 
 const MainContainer = props => {
     return(

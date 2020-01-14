@@ -8,18 +8,24 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.6",
     "expo": "~36.0.0",
     "navigationbar-react-native": "0.0.5",
     "prop-types": "^15.7.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-chart-kit": "^4.3.0",
+    "react-native-chart-kit": "^4.4.0",
+    "react-native-gesture-handler": "^1.5.3",
+    "react-native-safe-area-context": "^0.6.0",
+    "react-native-safe-area-view": "^1.0.0",
     "react-native-svg": "9.13.3",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^2.0.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.8.3",
     "babel-preset-expo": "~8.0.0"
   },
   "private": true

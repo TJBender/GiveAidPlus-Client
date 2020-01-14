@@ -1,14 +1,20 @@
 import React, { useState, useEffect} from 'react';
 import NavBar from './components/NavBar'
 import MainContainer from './containers/MainContainer'
-import { StyleSheet, SafeAreaView, FlatList, Text, View, ActivityIndicator, Dimensions} from 'react-native';
+import { StyleSheet, FlatList, Text, View, Button, SafeAreaView } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 export default function App() {
   const [volunteers, setVolunteers] = useState([]);
   // const [loading, setLoading] = useState(true);
+
+  // const MainNavigator = createStackNavigator({
+  //   MainContainer: { screen: MainContainer }
+  // });
  
   useEffect(() => {
-    fetch("http://1b3ac74a.ngrok.io/volunteers")
+    fetch("http://572c1358.ngrok.io/volunteers")
       .then(resp => resp.json())
       .then(data => {
         setVolunteers(data);
@@ -30,7 +36,7 @@ export default function App() {
           </View>
         )}
       />
-
+      {/* <Button title="Click!"></Button> */}
     </SafeAreaView>
   );
 }

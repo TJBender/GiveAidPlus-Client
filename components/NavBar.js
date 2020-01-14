@@ -1,4 +1,5 @@
 // child of App
+// get data as props from app
 import React from 'react';
 import { View, Text } from 'react-native';
 
