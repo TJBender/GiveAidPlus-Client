@@ -1,6 +1,5 @@
-// Child of main container 
 // VolunteerPage is now used in place of VolunteerBox and VolunteerTable
-// Fetch from jobs to see all jobs in JOBtABLE
+
 import React, { useState, useEffect, Fragment } from 'react'
 import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native'
 import {
@@ -29,8 +28,6 @@ const VolunteerPage = props => {
             }) 
     }, [])
 
-    // Get 
-    // const totalHours = 0
     // console.log(props.navigation.state.params.id)
 
     return (
@@ -38,6 +35,7 @@ const VolunteerPage = props => {
         <>
         <View style={styles.topContainer}>
              <Text> Total Hours: {volunteerHours} </Text>
+             {/* react native chart kit working */}
                 <ProgressChart 
                     data={chartData}
                     width={Dimensions.get('window').width - 16}
