@@ -8,9 +8,15 @@
 */       
 import React from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
+import VolunteerJob from './components/VolunteerJob'
 
 const VolunteerTable = props => {
+
+    const URL = ''
+
+
     return (
+        // fetch from jobs to see all jobs
         <View> 
             <Text> Volunteer Table </Text>
             <FlatList>
@@ -19,3 +25,5 @@ const VolunteerTable = props => {
         </View>
     )
 }
+
+export default VolunteerTable
