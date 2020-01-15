@@ -1,10 +1,12 @@
 // child of MainContainer
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, StyleSheet, Button } from 'react-native'
-// import MainContainer from '../containers/MainContainer'
+import { View, TextInput, Keyboard, Text, StyleSheet, Button, ImageBackground, TouchableWithoutFeedback } from 'react-native'
+import image from '../resources/images/loginimg.jpg';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+
 const Login = props => {
 
-    const URL = "http://3ca6bc6c.ngrok.io/volunteers"
+    const URL = "http://e9d0c3c0.ngrok.io/volunteers"
     const [user, setUser] = useState([])
     const [userInput, setUserInput] = useState('')
 
@@ -25,29 +27,56 @@ const Login = props => {
     }
 
     return ( 
-    <View style={styles.loginContainer}>
-        <TextInput
-            placeholder='name...'
-            style={{ height: 40, width: 100, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={setUserInput}
-            value={userInput}
-        />
-        <TextInput
-            style={{ height: 40, width: 100, borderColor: 'gray', borderWidth: 1 }}
-            secureTextEntry={true}
-            placeholder='password...'
-        />
-        <Button title="Log In" onPress={()=> pressHandler() }></Button>
-    </View>
+    <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+        <View style={styles.loginContainer}>
+            <ImageBackground source={image} style={{width: '100%', height: '100%'}}>
+                <View style={styles.loginBox}>    
+                    <TextInput
+                        placeholder='name...'
+                        onChangeText={setUserInput}
+                        value={userInput}
+                    />
+                    <TextInput
+                        secureTextEntry={true}
+                        placeholder='password...'
+                    />
+            </View> 
+            <Text title="Log In" style={styles.button} onPress={() => pressHandler()}>Log In</Text>
+            </ImageBackground>
+        </View>
+    </TouchableWithoutFeedback>
     )
 }
 
 const styles = StyleSheet.create({
     loginContainer: {
-        flex: .5,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    loginBox: {
+        height: 50, 
+        width: 200,
+        borderColor: 'gray', 
+        borderWidth: 2,
+        marginTop: 200,
+        borderStyle: 'dotted',
+        borderRadius: 1,
+        alignSelf: 'center'
+    },
+        button: {
+            color: 'white',
+            backgroundColor: 'darkturquoise',
+            borderColor: 'darkturquoise',
+            borderRadius: 12,
+            fontSize: 20,
+            fontWeight: 'bold',
+            overflow: 'hidden',
+            padding: 10,
+            textAlign: 'center',
+            width: 150,
+            alignSelf: 'center'
+    },
 })
 
 export default Login
