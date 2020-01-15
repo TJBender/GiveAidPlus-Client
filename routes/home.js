@@ -24,7 +24,8 @@ const screens = {
         screen: JoinNewJob
     },
     VolunteerPage: {
-        screen: VolunteerPage
+        screen: VolunteerPage,
+        navigationOptions: 'My Jobs'
 
     }
 }
