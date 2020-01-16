@@ -6,7 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const Login = props => {
 
-    const URL = "http://e9d0c3c0.ngrok.io/volunteers"
+    const URL = "http://aff225c7.ngrok.io/volunteers"
     const [user, setUser] = useState([])
     const [userInput, setUserInput] = useState('')
 
@@ -23,22 +23,25 @@ const Login = props => {
     const pressHandler = () => {
         let foundUser = user.find((us) => us.name == userInput ) 
         props.navigation.navigate('VolunteerPage', {...foundUser})
-
     }
 
     return ( 
     <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
         <View style={styles.loginContainer}>
             <ImageBackground source={image} style={{width: '100%', height: '100%'}}>
+                <Text title="giveaid+" style={styles.titleStyle}> Give Aid+</Text>
                 <View style={styles.loginBox}>    
                     <TextInput
-                        placeholder='name...'
+                        placeholder='Name...'
                         onChangeText={setUserInput}
                         value={userInput}
+                        style={{padding: 5}}
                     />
                     <TextInput
                         secureTextEntry={true}
-                        placeholder='password...'
+                        placeholder='Password...'
+                        style={{padding: 5}}
+                        placeholderStyle={{}}
                     />
             </View> 
             <Text title="Log In" style={styles.button} onPress={() => pressHandler()}>Log In</Text>
@@ -52,24 +55,27 @@ const styles = StyleSheet.create({
     loginContainer: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
     },
     loginBox: {
-        height: 50, 
+        height: 70, 
         width: 200,
         borderColor: 'gray', 
         borderWidth: 2,
         marginTop: 200,
+        marginBottom: 20,
         borderStyle: 'dotted',
         borderRadius: 1,
         alignSelf: 'center'
     },
-        button: {
+    button: {
             color: 'white',
             backgroundColor: 'darkturquoise',
             borderColor: 'darkturquoise',
             borderRadius: 12,
             fontSize: 20,
+            fontFamily: 'Baskerville-BoldItalic',
             fontWeight: 'bold',
             overflow: 'hidden',
             padding: 10,
@@ -77,6 +83,14 @@ const styles = StyleSheet.create({
             width: 150,
             alignSelf: 'center'
     },
+    titleStyle: {
+        position: 'absolute',
+        marginTop: 130,
+        alignSelf: 'center',
+        fontFamily: 'Georgia-BoldItalic',
+        fontSize:  49,
+        color: 'white',
+    }
 })
 
 export default Login
