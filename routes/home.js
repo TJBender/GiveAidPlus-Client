@@ -1,26 +1,37 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Login from '../components/Login';
-import SignUp from '../components/SignUp';
-import JoinNewJob from '../containers/JoinNewJob'
-import VolunteerPage from '../containers/VolunteerPage'
-// import MainContainer from '../containers/MainContainer';
-
+import JoinNewJob from '../containers/JoinNewJob';
+import VolunteerPage from '../containers/VolunteerPage';
+import Profile from '../components/Profile';
+import Header from '../shared/header';
+import React from 'react';
 
 const screens = {
     Login: {
         screen: Login,
         navigationOptions: {
-            title: 'Login'
-        }
+            headerTitle: ()=> <Header />,
+        },
     },
     JoinNewJob: {
-        screen: JoinNewJob
+        screen: JoinNewJob,
+        navigationOptions: {
+            headerTitle: () => <Header />,
+        },
     },
     VolunteerPage: {
         screen: VolunteerPage,
-        navigationOptions: 'My Jobs'
+        navigationOptions: {
+            headerTitle: () => <Header />,
+        },
 
+    },
+    Profile: {
+        screen: Profile,
+        navigationOptions: {
+            headerTitle: () => <Header />
+        },
     }
 }
 

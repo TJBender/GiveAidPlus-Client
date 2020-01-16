@@ -32,7 +32,7 @@ const JoinNewJob = props => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    volunteer_job: { volunteer_id: props.navigation.state.params.currentUser, job_id:id}
+                    volunteer_job: { volunteer_id: props.navigation.state.params.currentUser, job_id:id }
                 })
             })
             Alert.alert("Thank You For Volunteering!")
@@ -101,13 +101,3 @@ const styles = StyleSheet.create({
 })
 
 export default JoinNewJob
-
-    // Example of press handler from the Login Page
-    // const pressHandler = () => {
-    //     let foundUser = user.find((us) => us.name == userInput)
-    //     props.navigation.navigate('VolunteerPage', { ...foundUser })
-    // }
-    // console.log("All JOBS: ")
-    // console.log(props.navigation.state.params)
-    // console.log(allJobs)
-    // console.log("--------------------------")
