@@ -14,12 +14,6 @@ const screens = {
             title: 'Login'
         }
     },
-    SignUp: {
-        screen: SignUp,
-        navigationOptions: {
-            title: 'Back'
-        }
-    },
     JoinNewJob: {
         screen: JoinNewJob
     },

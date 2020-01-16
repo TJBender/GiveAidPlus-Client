@@ -12,12 +12,14 @@ const VolunteerPage = props => {
     const [volunteerJobs, setVolunteerJobs] = useState([]);
     const [volunteerHours, setVolunteerHours] = useState(null);
     const chartData = {
-        labels: ["Hours"],
-        data: [0.6]
+        labels: ["Goal", "Jobs", "Fun"],
+        data: [0.42, 0.63, 0.81]
     }
 
+
+
     // Get Volunteer Jobs
-    const volJobURL = `http://e9d0c3c0.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
+    const volJobURL = `http://aff225c7.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
     useEffect(() => {
         fetch(volJobURL)
             .then(resp => resp.json())
@@ -29,25 +31,31 @@ const VolunteerPage = props => {
             }) 
     }, [])
 
-    // Get 
-    // const totalHours = 0
-    // console.log(props.navigation.state.params.id)
+    // Example of press handler from the Login Page
+    // const pressHandler = () => {
+    //     let foundUser = user.find((us) => us.name == userInput)
+    //     props.navigation.navigate('VolunteerPage', { ...foundUser })
+    // }
+
+    const pressHandler = () => {
+        props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id })
+    }
 
     return (
 
         <>
         <View style={styles.topContainer}>
-             <Text> Total Hours: {volunteerHours} </Text>
+             {/* <Text> Total Hours: {volunteerHours} </Text> */}
                 <ProgressChart 
                     data={chartData}
-                    width={Dimensions.get('window').width - 16}
-                    height={220}
+                    width={Dimensions.get('window').width}
+                    height={Dimensions.get('window').height - 500}
                     chartConfig={{
                         backgroundColor: '#1cc910',
                         backgroundGradientFrom: '#eff3ff',
                         backgroundGradientTo: '#efefef',
                         decimalPlaces: 2,
-                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                        color: (opacity = 1) => `rgba(240, 200, 0, ${opacity})`,
                         style: {
                             borderRadius: 16,
                         },
@@ -56,17 +64,18 @@ const VolunteerPage = props => {
                 />
         </View>
         <View style={styles.bottomContainer}>
-            <Text> My Jobs </Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', fontFamily: 'Baskerville-BoldItalic' }}> {props.navigation.state.params.name}'s Jobs </Text>
                 <FlatList
                     data={volunteerJobs}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={styles.item}>
-                            <Text>Job Title: {item.name}</Text>
-                            <Text>Hours: {`${item.hours}`}</Text>
+                            <Text style={styles.jobCardText}>Job Title: {item.name}</Text>
+                            <Text style={styles.jobCardText}>Hours: {`${item.hours}`}</Text>
                         </View>
                     )}
                 />
+                <Text style={styles.button} onPress={()=> pressHandler()}> Available Positions</Text>
         </View>
         </>
     )
@@ -78,8 +87,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#ddd'
     },
     bottomContainer: {
-        flex: 1,
-        backgroundColor: 'gold'
+        height: 412,
+        backgroundColor: 'gold',
+        paddingBottom: 30,
+        paddingTop:  5,
+    },
+    jobCardText: {
+        fontFamily: 'Avenir-MediumOblique',
     },
     item: {
         backgroundColor: '#ddd',
@@ -89,6 +103,20 @@ const styles = StyleSheet.create({
         borderStyle: 'dotted',
         borderWidth: 2,
         borderRadius: 1,
+    },
+    button: {
+        color: 'white',
+        backgroundColor: 'darkturquoise',
+        borderColor: 'darkturquoise',
+        borderRadius: 12,
+        fontSize: 16,
+        fontFamily: 'Baskerville-BoldItalic',
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 10,
+        textAlign: 'center',
+        width: 170,
+        alignSelf: 'center'
     }
 })
 

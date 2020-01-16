@@ -8,7 +8,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 // import SignUp from '../components/SignUp'
 // import { createStackNavigator } from 'react-navigation-stack';
 
-
+// !! NO LONGER USING THIS COMPONENT CAUSE REACT NATIVE DOESNT DO COMPONENT TREES LOLOLOLOLOLOLOLOL .... !!
 const MainContainer = props => {
 
     const pressHandler = () => {
@@ -18,12 +18,8 @@ const MainContainer = props => {
     return(
         <View> 
             <Text> WHYYYY </Text>
-                <Button title={"Login"} onPress={(e)=> {console.log("alrighty then, login bitch!")}}/>
+                <Button title={"Login"} onPress={(e)=> {console.log("alrighty then, login!")}}/>
                 <Button title={"Sign Up"} onPress={(e)=> {console.log("signup please?")}}/>
-          {/* originally was going to conditionally render login or signup and otherwise render the different containers  */}
-            {/* so onPress of the above buttons you'd go to either login or signup */}
-            {/* <Login/>
-            <SignUp/> */}
         </View>
     )
 }
