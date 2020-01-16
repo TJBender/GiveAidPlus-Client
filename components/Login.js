@@ -45,6 +45,7 @@ const Login = props => {
                     />
             </View> 
             <Text title="Log In" style={styles.button} onPress={() => pressHandler()}>Log In</Text>
+            <Text title="A great way to give" style={styles.giveStyle}>A Faster Way To Give</Text>
             </ImageBackground>
         </View>
     </TouchableWithoutFeedback>
@@ -90,6 +91,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Georgia-BoldItalic',
         fontSize:  49,
         color: 'white',
+    },
+    giveStyle: {
+        position: 'absolute',
+        marginVertical: 350,
+        alignSelf: 'center',
+        fontSize: 14,
+        color: 'white',
+        fontFamily: 'Georgia-BoldItalic'
     }
 })
 

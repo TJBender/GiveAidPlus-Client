@@ -36,7 +36,7 @@ const VolunteerPage = props => {
     //     let foundUser = user.find((us) => us.name == userInput)
     //     props.navigation.navigate('VolunteerPage', { ...foundUser })
     // }
-
+    console.log(props.navigation.state.params)
     const pressHandler = () => {
         props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id })
     }
