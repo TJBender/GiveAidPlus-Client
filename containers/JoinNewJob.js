@@ -6,7 +6,7 @@ const JoinNewJob = props => {
 
     const [allJobs, setAllJobs] = useState([]);
     const [inMyJobs, setInMyJobs] = useState(false);
-    const jobsURL = "http://aff225c7.ngrok.io/jobs"
+    const jobsURL = "http://1dee64e5.ngrok.io/jobs"
 
     //  Get List of All Jobs
      useEffect(() => {
@@ -25,7 +25,7 @@ const JoinNewJob = props => {
 
     const pressHandler = (id) => {
         if (!props.navigation.state.params.existingJobs.find(job=> job.id === id)) {
-            fetch(`http://aff225c7.ngrok.io/volunteer_jobs`, {
+            fetch(`http://1dee64e5.ngrok.io/volunteer_jobs`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -34,6 +34,9 @@ const JoinNewJob = props => {
                 body: JSON.stringify({
                     volunteer_job: { volunteer_id: props.navigation.state.params.currentUser, job_id:id }
                 })
+            }).then(resp=>resp.json())
+            .then(res=>{
+                props.navigation.state.params.inMyJobs(prevState => !prevState)
             })
             Alert.alert("Thank You For Volunteering!")
         } else {

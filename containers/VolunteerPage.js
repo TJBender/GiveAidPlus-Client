@@ -11,6 +11,7 @@ const VolunteerPage = props => {
 
     const [volunteerJobs, setVolunteerJobs] = useState([]);
     const [volunteerHours, setVolunteerHours] = useState(null);
+    const [inMyJobs, setInMyJobs] = useState(false);
     const chartData = {
         labels: ["Goal", "Jobs", "Fun"],
         data: [0.42, 0.63, 0.81]
@@ -19,26 +20,33 @@ const VolunteerPage = props => {
 
 
     // Get Volunteer Jobs
-    const volJobURL = `http://aff225c7.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
+    const volJobURL = `http://1dee64e5.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
     useEffect(() => {
         fetch(volJobURL)
             .then(resp => resp.json())
             .then(resp => {
                 setVolunteerJobs(resp.jobs)
-                setVolunteerHours(resp.total_hours)
+                // setVolunteerHours(resp.total_hours)
             }).catch(function(error){
                 alert(error)
             }) 
-    }, [])
+    },[])
 
-    // Example of press handler from the Login Page
-    // const pressHandler = () => {
-    //     let foundUser = user.find((us) => us.name == userInput)
-    //     props.navigation.navigate('VolunteerPage', { ...foundUser })
-    // }
-    console.log(props.navigation.state.params)
+    useEffect(() => {
+        fetch(volJobURL)
+            .then(resp => resp.json())
+            .then(resp => {
+                setVolunteerJobs(resp.jobs)
+                // setVolunteerHours(resp.total_hours)
+            }).catch(function (error) {
+                alert(error)
+            })
+    }, [inMyJobs])
+
+
     const pressHandler = () => {
-        props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id })
+        props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id, inMyJobs: setInMyJobs })
+
     }
 
     return (
@@ -72,6 +80,7 @@ const VolunteerPage = props => {
                         <View style={styles.item}>
                             <Text style={styles.jobCardText}>Job Title: {item.name}</Text>
                             <Text style={styles.jobCardText}>Hours: {`${item.hours}`}</Text>
+                            <Text style={styles.addJobButton}> Complete! </Text>
                         </View>
                     )}
                 />
@@ -117,6 +126,20 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 170,
         alignSelf: 'center'
+    },
+    addJobButton: {
+        color: 'white',
+        backgroundColor: 'darkturquoise',
+        borderColor: 'darkturquoise',
+        borderRadius: 12,
+        fontSize: 16,
+        fontFamily: 'Baskerville-BoldItalic',
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 10,
+        textAlign: 'center',
+        width: 110,
+        alignSelf: 'center',
     }
 })
 
