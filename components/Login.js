@@ -6,7 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const Login = props => {
 
-    const URL = "http://aff225c7.ngrok.io/volunteers"
+    const URL = "http://1dee64e5.ngrok.io/volunteers"
     const [user, setUser] = useState([])
     const [userInput, setUserInput] = useState('')
 
@@ -29,7 +29,7 @@ const Login = props => {
     <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
         <View style={styles.loginContainer}>
             <ImageBackground source={image} style={{width: '100%', height: '100%'}}>
-                <Text title="giveaid+" style={styles.titleStyle}> Give Aid+</Text>
+                <Text title="giveaid+" style={styles.titleStyle}>Gif Back</Text>
                 <View style={styles.loginBox}>    
                     <TextInput
                         placeholder='Name...'
@@ -45,7 +45,7 @@ const Login = props => {
                     />
             </View> 
             <Text title="Log In" style={styles.button} onPress={() => pressHandler()}>Log In</Text>
-            <Text title="A great way to give" style={styles.giveStyle}>A Faster Way To Give</Text>
+            <Text title="A great way to give" style={styles.giveStyle}>A Faster Way To Gif</Text>
             </ImageBackground>
         </View>
     </TouchableWithoutFeedback>

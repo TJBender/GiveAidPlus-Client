@@ -8,7 +8,7 @@ const Header = () => {
     <View style={styles.header}> 
         {/* Icon for the Menu */}
         <View> 
-            <Text style={styles.headerText}>Give Aid+</Text>
+            <Text style={styles.headerText}>Gif Back</Text>
         </View>
     </View>
     )
