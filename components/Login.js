@@ -6,7 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const Login = props => {
 
-    const URL = "http://1dee64e5.ngrok.io/volunteers"
+    const URL = "http://6718b0e3.ngrok.io/volunteers"
     const [user, setUser] = useState([])
     const [userInput, setUserInput] = useState('')
 
@@ -45,7 +45,7 @@ const Login = props => {
                     />
             </View> 
             <Text title="Log In" style={styles.button} onPress={() => pressHandler()}>Log In</Text>
-            <Text title="A great way to give" style={styles.giveStyle}>A Faster Way To Gif</Text>
+            <Text title="A great way to give" style={styles.giveStyle}>You GIVE - We GIF</Text>
             </ImageBackground>
         </View>
     </TouchableWithoutFeedback>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         marginVertical: 350,
         alignSelf: 'center',
-        fontSize: 14,
+        fontSize: 20,
         color: 'white',
         fontFamily: 'Georgia-BoldItalic'
     }
