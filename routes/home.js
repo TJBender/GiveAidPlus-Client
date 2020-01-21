@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import JoinNewJob from '../containers/JoinNewJob';
 import VolunteerPage from '../containers/VolunteerPage';
 import Profile from '../components/Profile';
+import Gif from '../containers/Gif';
 import Header from '../shared/header';
 import React from 'react';
 
@@ -26,6 +27,12 @@ const screens = {
             headerTitle: () => <Header/>
         },
 
+    },
+    'Thank You!': {
+        screen: Gif,
+        navigationOptions: {
+            headerTitle: () => <Header/>
+        }
     },
     Profile: {
         screen: Profile,

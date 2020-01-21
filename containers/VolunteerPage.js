@@ -2,30 +2,28 @@
 // VolunteerPage is now used in place of VolunteerBox and VolunteerTable
 // Fetch from jobs to see all jobs in JOBtABLE
 import React, { useState, useEffect, Fragment } from 'react'
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native'
-import {
-    ProgressChart
-} from 'react-native-chart-kit';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native'
+import ImageView from 'react-native-image-view';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const VolunteerPage = props => {
 
     const [volunteerJobs, setVolunteerJobs] = useState([]);
-    const [volunteerHours, setVolunteerHours] = useState(null);
+    const [volunteerHours, setVolunteerHours] = useState(33);
     const [inMyJobs, setInMyJobs] = useState(false);
-    const chartData = {
-        labels: ["Goal", "Jobs", "Fun"],
-        data: [0.42, 0.63, 0.81]
-    }
+    // const [isImageViewVisible, setIsImageViewVisible] = useState(true)
+    const [completedJobs, setCompletedJobs] = useState([])
+    
 
-
-
-    // Get Volunteer Jobs
-    const volJobURL = `http://1dee64e5.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
+    
+    // Get Volunteer Jobs:
+    const volJobURL = `http://6718b0e3.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
     useEffect(() => {
         fetch(volJobURL)
             .then(resp => resp.json())
             .then(resp => {
                 setVolunteerJobs(resp.jobs)
+                // took hours out because i am holding it in state for presentation day
                 // setVolunteerHours(resp.total_hours)
             }).catch(function(error){
                 alert(error)
@@ -43,36 +41,65 @@ const VolunteerPage = props => {
             })
     }, [inMyJobs])
 
-
+    // Press Handler For 'Available Positions' Button:
     const pressHandler = () => {
-        props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id, inMyJobs: setInMyJobs })
-
+        props.navigation.navigate('JoinNewJob', { existingJobs: [...volunteerJobs], currentUser: props.navigation.state.params.id, inMyJobs: setInMyJobs, totalHours: volunteerHours })
     }
 
-    return (
+    const gifPressView = () => {
+        props.navigation.navigate('Thank You!')
+    }
+    // Shows Total Hours Volunteer Has Worked: 
+    // const animatedHours = (hours) => {
+    //     if (hours >= 100) {
+    //         setVolunteerHours(100)
+    //     } else if (hours <= 0 ) {
+    //         setVolunteerHours(0)
+    //     } else {
+    //         setVolunteerHours(hours)
+    //     }
+    // }
 
+    const addCompletedJob = (id, hour) => {
+        
+        let completedJob = volunteerJobs.find(job=> 
+                job.id === id
+            )
+
+        let uncompletedJobs = volunteerJobs.filter(job => 
+                job.id !== id
+            )
+        setVolunteerJobs(uncompletedJobs)
+        setCompletedJobs(prev => [...prev,completedJob])
+        setVolunteerHours(volunteerHours + hour)
+    }
+
+
+
+    return (
         <>
         <View style={styles.topContainer}>
-             {/* <Text> Total Hours: {volunteerHours} </Text> */}
-                <ProgressChart 
-                    data={chartData}
-                    width={Dimensions.get('window').width}
-                    height={Dimensions.get('window').height - 500}
-                    chartConfig={{
-                        backgroundColor: '#1cc910',
-                        backgroundGradientFrom: '#eff3ff',
-                        backgroundGradientTo: '#efefef',
-                        decimalPlaces: 2,
-                        color: (opacity = 1) => `rgba(240, 200, 0, ${opacity})`,
-                        style: {
-                            borderRadius: 16,
-                        },
-                    }}
-                    hideLegend={false}
-                />
+         {/* Animated Cirle shows total hours volunteered */}
+                <AnimatedCircularProgress
+                    size={220}
+                    width={27}
+                    fill={volunteerHours}
+                    duration={800}
+                    tintColor="gold"
+                    onAnimationComplete={() => console.log('Animation Babeeeyy')}
+                    backgroundColor="grey">
+                   { 
+                        () => (
+                            <Text style={styles.animatedNumbers}> 
+                                { volunteerHours } hours
+                            </Text>
+                        )
+                   }
+                </AnimatedCircularProgress>
+
         </View>
         <View style={styles.bottomContainer}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', fontFamily: 'Baskerville-BoldItalic' }}> {props.navigation.state.params.name}'s Jobs </Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', fontFamily: 'Baskerville-BoldItalic', paddingBottom: 5 }}> {props.navigation.state.params.name}'s Jobs </Text>
                 <FlatList
                     data={volunteerJobs}
                     keyExtractor={(item) => item.id}
@@ -80,10 +107,25 @@ const VolunteerPage = props => {
                         <View style={styles.item}>
                             <Text style={styles.jobCardText}>Job Title: {item.name}</Text>
                             <Text style={styles.jobCardText}>Hours: {`${item.hours}`}</Text>
-                            <Text style={styles.addJobButton}> Complete! </Text>
+                            {/* WTF?! Work on this part after lunch-- display gif! */}
+                            <Text style={styles.addJobButton} onPress={() => addCompletedJob(item.id, item.hours)}> Complete!</Text>
                         </View>
                     )}
                 />
+
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', fontFamily: 'Baskerville-BoldItalic', paddingBottom: 5 }}> Completed Jobs</Text>
+                <FlatList
+                    data={completedJobs}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.item}>
+                            <Text style={styles.jobCardText}>Job Title: {item.name}</Text>
+                            <Text style={styles.jobCardText}>Hours: {`${item.hours}`}</Text>
+                            <Text style={styles.addJobButton} onPress={() => gifPressView()}> Get Giffed</Text>
+                        </View>
+                    )}
+                />
+
                 <Text style={styles.button} onPress={()=> pressHandler()}> Available Positions</Text>
         </View>
         </>
@@ -93,6 +135,8 @@ const VolunteerPage = props => {
 const styles = StyleSheet.create({
     topContainer: {
         flex: 1,
+        paddingLeft: 70,
+        paddingTop: 30,
         backgroundColor: '#ddd'
     },
     bottomContainer: {
@@ -140,6 +184,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 110,
         alignSelf: 'center',
+    },
+    animatedNumbers: {
+        fontWeight: 'bold',
+        fontFamily: 'Baskerville-BoldItalic',
+        fontSize: 35,
+        color: 'grey'
     }
 })
 
