@@ -22,7 +22,7 @@ const Login = props => {
 
     const pressHandler = () => {
         let foundUser = user.find((us) => us.name == userInput ) 
-        props.navigation.navigate('VolunteerPage', {...foundUser})
+        props.navigation.navigate('Home', {...foundUser})
     }
 
     return ( 

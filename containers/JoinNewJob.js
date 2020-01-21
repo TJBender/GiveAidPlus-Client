@@ -5,7 +5,6 @@ import { View, Text, FlatList, Alert, Button, StyleSheet } from 'react-native'
 const JoinNewJob = props => {
 
     const [allJobs, setAllJobs] = useState([]);
-    const [inMyJobs, setInMyJobs] = useState(false);
     const jobsURL = "http://6718b0e3.ngrok.io/jobs"
 
     //  Get List of All Jobs
@@ -19,12 +18,9 @@ const JoinNewJob = props => {
             })
     }, [])
 
-    // onPress grab ID of job
-    // check if that job matches any jobs in my jobs already
-    // Post: New Job to My Jobs
 
     const pressHandler = (id) => {
-        if (!props.navigation.state.params.existingJobs.find(job=> job.id === id)) {
+        if (!props.navigation.state.params.existingJobs.find(job => job.id === id)) {
             fetch(`http://6718b0e3.ngrok.io/volunteer_jobs`, {
                 method: 'POST',
                 headers: {
@@ -37,12 +33,18 @@ const JoinNewJob = props => {
             }).then(resp=>resp.json())
             .then(res=>{
                 props.navigation.state.params.inMyJobs(prevState => !prevState)
-                
             })
             Alert.alert("Thank You For Volunteering!")
         } else {
             Alert.alert("You Already Volunteered For This Job")
         }
+    }
+
+    const filterNewJobs = () => {
+        let filterJobs = [...allJobs].filter((job)=> {
+            return !props.navigation.state.params.completedJobs.includes(job.id)
+        })
+        return filterJobs
     }
 
 
@@ -54,14 +56,15 @@ const JoinNewJob = props => {
                     color: 'white',
                     fontSize: 24,
                     fontFamily: 'Baskerville-BoldItalic',}}> Available Positions </Text>
+
                     <FlatList
-                        data={allJobs}
+                        data={filterNewJobs()}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                             <View style={styles.item}>
+                                <Text style={styles.jobCompanyText}>Company: {`${item.company_name}`}</Text>
                                 <Text style={styles.jobCardText}>Job Title: {item.name}</Text>
                                 <Text style={styles.jobCardText}>Hours: {item.hours}</Text>
-                                {/* <Text style={styles.jobCardText}>Company: {`${item.company}`}</Text> */}
                                 <Text style={styles.button} onPress={()=> pressHandler(item.id)}>Volunteer</Text>
                             </View>
                         )}
@@ -87,6 +90,10 @@ const styles = StyleSheet.create({
     },
     jobCardText: {
         fontFamily: 'Avenir-MediumOblique',
+    },
+    jobCompanyText: {
+        fontFamily: 'Avenir-HeavyOblique',
+        fontSize: 14
     },
     button: {
         color: 'white',
