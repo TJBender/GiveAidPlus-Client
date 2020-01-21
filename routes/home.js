@@ -15,13 +15,13 @@ const screens = {
             headerTitle: ()=> <Header />,
         },
     },
-    JoinNewJob: {
+    'Add Job': {
         screen: JoinNewJob,
         navigationOptions: {
             headerTitle: () => <Header/>
         },
     },
-    VolunteerPage: {
+    'Home': {
         screen: VolunteerPage,
         navigationOptions: {
             headerTitle: () => <Header/>
