@@ -16,7 +16,7 @@ const VolunteerPage = props => {
 
     
     // Get Volunteer Jobs:
-    const volJobURL = `http://6718b0e3.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
+    const volJobURL = `http://a9a7e341.ngrok.io/volunteers/${props.navigation.state.params.id}/jobs`
     useEffect(() => {
         fetch(volJobURL)
             .then(resp => resp.json())
@@ -85,6 +85,16 @@ const VolunteerPage = props => {
         return filterJobs
     }
 
+    const changeHourColor = (hours) => {
+        if (hours <= 99) {
+            return "gold"
+        } else if (hours >= 100 && hours <= 200) {
+            return "purple"
+        } else {
+            return "green"
+        }
+    }
+
 
 
     return (
@@ -96,7 +106,7 @@ const VolunteerPage = props => {
                     width={27}
                     fill={volunteerHours}
                     duration={800}
-                    tintColor="gold"
+                    tintColor={changeHourColor(volunteerHours)}
                     onAnimationComplete={() => console.log('Animation Babeeeyy')}
                     backgroundColor="grey">
                    { 

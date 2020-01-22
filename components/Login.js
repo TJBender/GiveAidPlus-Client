@@ -6,7 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const Login = props => {
 
-    const URL = "http://6718b0e3.ngrok.io/volunteers"
+    const URL = "http://a9a7e341.ngrok.io/volunteers"
     const [user, setUser] = useState([])
     const [userInput, setUserInput] = useState('')
 
