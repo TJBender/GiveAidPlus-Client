@@ -5,7 +5,7 @@ import { View, Text, FlatList, Alert, Button, StyleSheet } from 'react-native'
 const JoinNewJob = props => {
 
     const [allJobs, setAllJobs] = useState([]);
-    const jobsURL = "http://6718b0e3.ngrok.io/jobs"
+    const jobsURL = "http://a9a7e341.ngrok.io/jobs"
 
     //  Get List of All Jobs
      useEffect(() => {
@@ -21,7 +21,7 @@ const JoinNewJob = props => {
 
     const pressHandler = (id) => {
         if (!props.navigation.state.params.existingJobs.find(job => job.id === id)) {
-            fetch(`http://6718b0e3.ngrok.io/volunteer_jobs`, {
+            fetch(`http://a9a7e341.ngrok.io/volunteer_jobs`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -59,7 +59,7 @@ const JoinNewJob = props => {
 
                     <FlatList
                         data={filterNewJobs()}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item) => `${item.id}`}
                         renderItem={({ item }) => (
                             <View style={styles.item}>
                                 <Text style={styles.jobCompanyText}>Company: {`${item.company_name}`}</Text>
